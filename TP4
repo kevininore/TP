@@ -98,19 +98,6 @@ public class TriRécursif {
 		}
 
 		return tableau;
-	} // la méthode Random ne fonctionne pas
-
-	public static int[] fusion(int[] tableau1, int[] tableau2) {
-		int[] bigtableau = new int[tableau1.length + tableau2.length];
-		int i1 = 0, i2 = 0;
-		while (i1 < tableau1.length && i2 < tableau2.length) {
-			if (i1 >= tableau1.length) {
-				bigtableau[i1++] = tableau2[i2++];
-			} 
-			else if (i2 >= tableau2.length) {
-				bigtableau[i1++] = tableau1;
-
-			}
-		}
 	}
 }
+	
