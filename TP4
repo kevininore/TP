@@ -5,7 +5,12 @@ public class TriRécursif {
 	public static void main(String[] args) {
 
 		int[] tableau = generate(4);
+		System.out.println(" ");
 		triRecursif(tableau, 0, 3);
+		long début2 = System.nanoTime();
+		triRecursif(tableau,0, 3);
+		long durée2 = System.nanoTime() - début2; //calcul de la durée du tri récursif
+	    System.out.println("La durée du tri récursif est : " + durée2 + "ns" );
 	}
 
 	static public int[] generate(int size) {
@@ -24,20 +29,6 @@ public class TriRécursif {
 		return tab;
 	}
 
-	public static int[] trier(int[] tab, int debut, int fin) {
-
-		int diff = (fin - debut) / 2;
-		int[] t1 = trier(tab, debut, debut + diff);
-		int[] t2 = trier(tab, debut + diff + 1, fin);
-		int[] res = new int[fin - debut + 1];
-		// Fusion de t1 et t2 dans res.
-		// res = fusion(t1, t2)
-		for (int k = 0; k < tab.length; k++)
-			System.out.print(tab[k]);
-		return res;
-
-	}
-
 	public static int[] Permuter(int[] tab1, int i, int j) {
 		int tmp = tab1[i];
 		tab1[i] = tab1[j];
@@ -45,8 +36,8 @@ public class TriRécursif {
 		return tab1;
 	}
 
-	public static int[] partition(int[] tableau, int debut, int fin, int IndexPivot) {
-		int c = fin;
+	public static int partition(int[] tableau, int debut, int fin, int IndexPivot) {
+		int c = debut;
 		int p = tableau[IndexPivot];
 		tableau = Permuter(tableau, debut, IndexPivot);
 		for (int i = debut + 1; i < fin; i++) {
@@ -57,16 +48,10 @@ public class TriRécursif {
 
 		}
 		tableau = Permuter(tableau, c, debut);
+		return c;
+}
 		
-		if (debut != IndexPivot) {
-			tableau = partition(tableau, 0, IndexPivot, IndexPivot/2);
-		}
-		if(IndexPivot+1 != fin) {
-			tableau = partition(tableau, IndexPivot+1, fin, (IndexPivot+fin)/2);
-		}
-		return tableau;
 
-	}
 
 	public static int[] triRecursif(int[] tableau, int debut, int fin) {
 		int pivot = (debut + fin) / 2;
@@ -78,14 +63,16 @@ public class TriRécursif {
 		}
 		for (int j = 0; j < tableau.length; j++) {
 			System.out.print(tableau[j] + " ");
-
+		
 		}
-
 		return tableau;
 	}
 
 	public static int[] triRapide(int[] tableau, int debut, int fin) {
-		int pivot = Random (debut, fin);
+		Random rand = new Random();
+		int pivot = rand.nextInt(debut);
+		
+		//int pivot = Random (debut, fin);
 		if (debut < fin) {
 			pivot = partition(tableau, debut, fin, pivot);
 			tableau = triRecursif(tableau, debut, pivot);
