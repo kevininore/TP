@@ -1,0 +1,59 @@
+
+public class Pile<T> {
+	
+	public static void main(String[] args) {
+		
+	}
+	
+	private T data;
+	private Pile<T> next;
+
+	public Pile() {
+		data = null;
+		next = null;
+	}
+
+	private Pile(T data, Pile<T> next) {
+		this.data = data;
+		this.next = next;
+	}
+
+	public void push(T data) {
+		Pile newPile = new Pile(data, this.next);
+		next = newPile;
+	}
+	
+	public T peek() {
+		if (next == null) return null;
+		return next.data;
+	}
+	
+	public T pop() {
+		if (next == null) return null;
+		T toReturn = next.data;
+		this.next = next.next;
+		return toReturn;
+	}
+	
+	public int count() { //iteratif  dans le meilleur des cas, la compléxité est en O(1) et dans le pire des cas, elle est en O(n)
+		if (next == null) {
+			return 0;
+		
+		}
+		else {
+			return 1+ next.count();
+		}
+	}
+		public int count2() { //recursif dans le pire des cas, ma complexité est en O(n)
+			Pile<T> tempNext = next;
+			int c = 0;
+			while (next != null) {
+				tempNext = tempNext.next;
+				c++;
+			}
+			return c;
+		}
+}
+	
+	
+
