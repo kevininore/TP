@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class palindrome {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("entrez votre phrase");
+		String phrase = scan.nextLine();
+		if (isPalindrome(removeSpace(phrase)) == true) {
+			System.out.println(phrase + " " + "est un palindrome");
+		}
+		else {
+			System.out.println(phrase+ " " +"n'est pas un palindrome");
+		}
+	}
+	
+		public static String removeSpace(String S1) {
+		return S1.replaceAll("\\W", "");
+	}
+
+	public static boolean isPalindrome(String phrase) {
+		
+		if (phrase.length() <= 1) {
+			return true;
+		}
+		if (phrase.charAt(0) != (phrase.charAt(phrase.length() - 1))) {
+			return false;
+		}
+		
+		return isPalindrome(phrase.substring(1, phrase.length()-1));
+	}
+}
+
+
